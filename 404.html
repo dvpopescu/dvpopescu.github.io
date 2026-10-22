@@ -1,0 +1,7 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Redirecting… · The BEAST Lab</title>
+<script>
+// Send old WordPress URLs (e.g. /people/, /publications/) to the matching section of the new one-page site
+var p=location.pathname.toLowerCase(), map={people:'people',publications:'publications',research:'research',news:'news','prospective-students':'join',contact:'contact',teaching:'about'};
+var hit=Object.keys(map).find(function(k){return p.indexOf('/'+k)===0;});
+location.replace('/'+(hit?'#'+map[hit]:''));
+</script></head><body><p>Page moved. <a href="/">Go to the BEAST Lab home page</a>.</p></body></html>

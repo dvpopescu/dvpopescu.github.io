@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The BEAST Lab · Popescu Lab · Columbia E3B</title>
+<link rel="icon" href="assets/img/popescu.jpg">
+<meta property="og:title" content="The BEAST Lab · Columbia E3B">
+<meta property="og:image" content="https://vioreldpopescu.com/assets/img/hero.jpg">
+<meta name="description" content="Biodiversity, Ecosystems and Animal Studies Team — quantitative ecology and conservation science at Columbia University E3B.">
+<style>
+:root{
+  --ink:#1d2622; --muted:#5b6660; --line:#e3e0d7; --bg:#faf8f3; --card:#ffffff;
+  --forest:#1f3a2e; --forest-2:#2d5241; --accent:#b5762a; --accent-soft:#f3e7d6;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --max:1080px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.65;font-size:17px;-webkit-font-smoothing:antialiased}
+a{color:var(--forest-2);text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:var(--accent)}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.2;color:var(--forest);margin:0 0 .5em}
+h2{font-size:clamp(1.8rem,3vw,2.3rem)}
+h3{font-size:1.2rem}
+p{margin:0 0 1em}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+.eyebrow{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:.6em}
+section{padding:88px 0;border-top:1px solid var(--line)}
+.lede{font-size:1.15rem;color:var(--muted);max-width:720px}
+.img{background:linear-gradient(135deg,#2d5241,#1f3a2e);overflow:hidden}
+.img img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* nav */
+header.nav{position:sticky;top:0;z-index:20;background:rgba(250,248,243,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{font-family:var(--serif);font-size:1.25rem;font-weight:700;color:var(--forest);text-decoration:none;letter-spacing:.02em}
+.brand span{color:var(--accent)}
+.nav ul{display:flex;gap:26px;list-style:none;margin:0;padding:0}
+.nav ul a{text-decoration:none;color:var(--ink);font-size:.95rem}
+.nav ul a:hover{color:var(--accent)}
+.menu-btn{display:none;background:none;border:1px solid var(--line);border-radius:6px;padding:6px 10px;font-size:1rem;cursor:pointer}
+
+/* hero */
+.hero{position:relative;min-height:78vh;display:flex;align-items:flex-end;color:#fff;border:0;padding:0}
+.hero .img{position:absolute;inset:0}
+.hero .img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,30,22,.15) 0%,rgba(15,30,22,.75) 100%)}
+.hero .wrap{position:relative;padding-bottom:72px;padding-top:120px}
+.hero h1{color:#fff;font-size:clamp(2.4rem,5.5vw,4rem);max-width:820px;margin-bottom:.3em}
+.hero p{font-size:1.2rem;max-width:640px;color:#eef2ee}
+.hero .eyebrow{color:#e8c48f}
+.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-block;padding:12px 22px;border-radius:999px;text-decoration:none;font-weight:600;font-size:.95rem}
+.btn.primary{background:#fff;color:var(--forest)}
+.btn.ghost{border:1px solid rgba(255,255,255,.6);color:#fff}
+.btn.primary:hover{background:var(--accent-soft);color:var(--forest)}
+.btn.ghost:hover{background:rgba(255,255,255,.12);color:#fff}
+
+/* about */
+.about{display:grid;grid-template-columns:1.4fr 1fr;gap:56px;align-items:start}
+.facts{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:28px}
+.facts dt{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.facts dd{margin:0 0 16px;font-family:var(--serif);font-size:1.1rem;color:var(--forest)}
+.facts dd:last-child{margin:0}
+
+/* research */
+.grid{display:grid;gap:24px}
+.g4{grid-template-columns:repeat(2,1fr)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.card .img{aspect-ratio:16/9}
+.card .body{padding:22px 24px 26px}
+.card p{color:var(--muted);font-size:.97rem;margin:0}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.tag{font-size:.75rem;background:var(--accent-soft);color:#7a4e17;padding:3px 10px;border-radius:999px}
+
+/* people */
+.pi{display:grid;grid-template-columns:260px 1fr;gap:40px;align-items:center;margin:40px 0 56px}
+.pi .img{aspect-ratio:4/5;border-radius:14px}
+.pi .role{color:var(--accent);font-weight:600;font-size:.95rem;margin-bottom:.8em}
+.links-inline a{margin-right:18px;font-size:.95rem}
+.people{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.person{text-align:left}
+.person .img{aspect-ratio:1;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--serif);font-size:2.4rem}
+.person h3{margin:14px 0 2px;font-size:1.08rem}
+.person .meta{font-size:.85rem;color:var(--accent);font-weight:600;margin-bottom:6px}
+.person p{font-size:.92rem;color:var(--muted);margin:0}
+.subhead{font-family:var(--sans);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:48px 0 18px}
+details.alumni{margin-top:48px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:4px 24px}
+details.alumni summary{cursor:pointer;padding:18px 0;font-family:var(--serif);font-size:1.2rem;color:var(--forest);font-weight:600}
+.alum-list{columns:2;column-gap:40px;padding:0 0 22px;margin:0;list-style:none}
+.alum-list li{break-inside:avoid;padding:8px 0;border-bottom:1px solid var(--line);font-size:.92rem;color:var(--muted)}
+.alum-list b{color:var(--ink);font-weight:600}
+.alum-list h4{font-family:var(--sans);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:18px 0 4px}
+
+/* publications */
+.pub-tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:28px 0 8px}
+.pub-tools input{flex:1;min-width:220px;padding:11px 16px;border:1px solid var(--line);border-radius:999px;font:inherit;font-size:.95rem;background:#fff}
+.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;font:inherit;font-size:.88rem;cursor:pointer;color:var(--ink)}
+.chip.on{background:var(--forest);color:#fff;border-color:var(--forest)}
+.count{font-size:.85rem;color:var(--muted);margin:6px 0 18px}
+.year{font-family:var(--serif);font-size:1.4rem;color:var(--forest);margin:34px 0 8px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.pub{padding:12px 0;font-size:.95rem;border-bottom:1px dashed var(--line)}
+.pub .t{font-weight:600;color:var(--ink)}
+.pub .a{color:var(--muted)}
+.pub .a b{color:var(--forest);font-weight:600}
+.pub .v{font-style:italic}
+.pub a.l{font-size:.82rem;margin-left:6px}
+.showall{margin-top:24px}
+.books{grid-template-columns:auto 1fr;gap:28px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;margin-top:28px}
+.books .img{width:110px;aspect-ratio:3/4;border-radius:6px}
+.note{font-size:.85rem;color:var(--muted)}
+
+/* news */
+.news-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:56px}
+.timeline{list-style:none;margin:0;padding:0;border-left:2px solid var(--line)}
+.timeline li{position:relative;padding:0 0 26px 26px}
+.timeline li::before{content:"";position:absolute;left:-7px;top:7px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+.timeline .when{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.timeline p{margin:.2em 0 0;font-size:.97rem}
+.media{list-style:none;margin:0;padding:0}
+.media li{padding:12px 0;border-bottom:1px solid var(--line);font-size:.93rem}
+.media .src{display:block;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+/* join + contact */
+.join{background:var(--forest);color:#e9efe9;border:0}
+.join h2{color:#fff}
+.join a{color:#f0cf9c}
+.join .cols{display:grid;grid-template-columns:1.3fr 1fr;gap:56px}
+.join ol{padding-left:1.2em;margin:0}
+.join li{margin-bottom:.6em}
+.join .box{background:rgba(255,255,255,.07);border-radius:14px;padding:28px}
+footer{padding:48px 0;font-size:.9rem;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+
+@media (max-width:860px){
+  .nav ul{display:none;position:absolute;top:64px;left:0;right:0;flex-direction:column;gap:0;background:var(--bg);border-bottom:1px solid var(--line);padding:8px 24px}
+  .nav ul.open{display:flex}
+  .nav ul li a{display:block;padding:10px 0}
+  .menu-btn{display:block}
+  .about,.news-grid,.join .cols,.pi{grid-template-columns:1fr}
+  .g4{grid-template-columns:1fr}
+  .pi .img{max-width:260px}
+  .alum-list{columns:1}
+  section{padding:64px 0}
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">The BEAST <span>Lab</span></a>
+    <button class="menu-btn" aria-label="Menu" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
+    <ul id="menu" onclick="this.classList.remove('open')">
+      <li><a href="#research">Research</a></li>
+      <li><a href="#people">People</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#join">Join</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="img"><img src="assets/img/hero.jpg" alt="" onerror="this.remove()"></div>
+  <div class="wrap">
+    <div class="eyebrow">Columbia University · Ecology, Evolution &amp; Environmental Biology</div>
+    <h1>Quantitative ecology for a world losing its wildlife.</h1>
+    <p>The Biodiversity, Ecosystems and Animal Studies Team builds rapid, practical, evidence-based solutions to reverse biodiversity loss, from Carpathian bears to Appalachian hellbenders.</p>
+    <div class="btns">
+      <a class="btn primary" href="#research">Explore our research</a>
+      <a class="btn ghost" href="#join">Join the lab</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap about">
+    <div>
+      <div class="eyebrow">About the lab</div>
+      <h2>Taxonomically (or beastly) agnostic.</h2>
+      <p class="lede">We tackle challenging biodiversity and conservation problems across many systems: Eastern US deciduous forests, British Columbia, the Romanian Carpathians, the Peruvian Amazon and Western China.</p>
+      <p>We work with management agencies, NGOs, industry and communities to deliver applied solutions to real-world conservation problems: overexploitation of wildlife, rapid biodiversity monitoring, trade-offs between renewable energy and biodiversity, endangered species recovery, and the effects of multiple stressors on sensitive amphibians.</p>
+    </div>
+    <dl class="facts">
+      <dt>Based at</dt><dd>Columbia E3B, New York City</dd>
+      <dt>Field systems</dt><dd>USA · Canada · Romania · Peru · China</dd>
+      <dt>Publications</dt><dd>85+ peer-reviewed papers, incl. <i>Science</i> &amp; <i>Nature Communications</i></dd>
+      <dt>Textbook</dt><dd><i>Fundamentals of Conservation Biology</i>, 4th ed.</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="wrap">
+    <div class="eyebrow">Research</div>
+    <h2>Four questions we keep coming back to</h2>
+    <p class="lede">How do human actions reshape animal–habitat relationships, from individual behaviour and physiology to populations and whole communities, and how do we turn that knowledge into resilient conservation plans?</p>
+    <div class="grid g4" style="margin-top:40px">
+      <article class="card">
+        <div class="img"><img src="assets/img/research-carnivores.jpg" alt="" onerror="this.remove()"></div>
+        <div class="body">
+          <h3>Carnivore ecology &amp; coexistence</h3>
+          <p>Brown bear management and human–wildlife conflict in Romania, the recovery of Ohio's bobcats, interactions within Carpathian mammal communities, and European bison rewilding.</p>
+          <div class="tags"><span class="tag">Brown bear</span><span class="tag">Bobcat</span><span class="tag">Lynx &amp; wolf</span><span class="tag">Bison</span></div>
+          
+        </div>
+      </article>
+      <article class="card">
+        <div class="img"><img src="assets/img/research-herps.jpg" alt="" onerror="this.remove()"></div>
+        <div class="body">
+          <h3>Amphibian &amp; reptile conservation</h3>
+          <p>Eastern hellbender headstarting, nesting and paternal care; carryover effects of pesticides and drought on pond-breeding frogs; road ecology of turtles and snakes.</p>
+          <div class="tags"><span class="tag">Hellbender</span><span class="tag">Wood frog</span><span class="tag">Road ecology</span></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="img"><img src="assets/img/research-monitoring.jpg" alt="" onerror="this.remove()"></div>
+        <div class="body">
+          <h3>Biodiversity monitoring</h3>
+          <p>Rapid, scalable surveys with eDNA and leech iDNA, camera traps, drones and machine learning, analysed with hierarchical occupancy and abundance models.</p>
+          <div class="tags"><span class="tag">eDNA / iDNA</span><span class="tag">Camera traps</span><span class="tag">Occupancy models</span></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="img"><img src="assets/img/research-planning.jpg" alt="" onerror="this.remove()"></div>
+        <div class="body">
+          <h3>Systematic conservation planning</h3>
+          <p>Spatial prioritization under climate and land-use change, biodiversity trade-offs of renewable energy development, and evidence for Natura 2000 and wildlife policy.</p>
+          <div class="tags"><span class="tag">Zonation</span><span class="tag">Energy transition</span><span class="tag">Policy</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PEOPLE -->
+<section id="people">
+  <div class="wrap">
+    <div class="eyebrow">People</div>
+    <h2>The team</h2>
+
+    <div class="pi">
+      <div class="img"><img src="assets/img/popescu.jpg" alt="Dr. Viorel Popescu holding a hellbender" onerror="this.remove()"></div>
+      <div>
+        <h3 style="font-size:1.6rem">Dr. Viorel D. Popescu</h3>
+        <div class="role">Lab PI · Senior Lecturer · Director, M.S. in <a href="https://sps.columbia.edu/academics/masters/biodiversity-data-analytics">Biodiversity Data Analytics</a></div>
+        <p>A broadly trained ecologist and environmental scientist from Romania who accidentally fell into conservation biology and never looked back. I love herps and large carnivores, spend too much time doing stats, and enjoy teaching conservation and working alongside conservation practitioners.</p>
+        <div class="links-inline">
+          <a href="mailto:v.popescu@columbia.edu">Email</a>
+          <a href="assets/docs/popescu-cv.pdf">CV (PDF)</a>
+          <a href="https://www.linkedin.com/in/viorel-popescu-9a72b379/">LinkedIn</a>
+          <a href="https://x.com/vioreldpopescu">X / Twitter</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="subhead">Graduate students</div>
+    <div class="grid people">
+      <div class="person">
+        <div class="img"><img src="assets/img/matt-huang.jpg" alt="Matt Huang" onerror="this.replaceWith('MH')"></div>
+        <h3>Matt Huang</h3><div class="meta">MA student · 2025–</div>
+        <p>Nest abandonment and filial cannibalism in Eastern Hellbenders. Cornell grad, turtle conservationist, rock climber.</p>
+      </div>
+      <div class="person">
+        <div class="img"><img src="assets/img/luveen-wadhwani.jpg" alt="Luveen Wadhwani" onerror="this.replaceWith('LW')"></div>
+        <h3>Luveen Wadhwani</h3><div class="meta">MA student · 2025–</div>
+        <p>AI and machine learning for large-mammal movement ecology. CTO of Voices for Asian Elephants and 15 years a software engineer.</p>
+      </div>
+    </div>
+
+    <div class="subhead">Undergraduate researchers</div>
+    <div class="grid people">
+      <div class="person">
+        <div class="img"><img src="assets/img/marcella-willett.jpg" alt="Marcella Servedio Willett" onerror="this.replaceWith('MW')"></div>
+        <h3>Marcella Servedio Willett</h3><div class="meta">Columbia EEEB</div>
+        <p>Meta-analysis of genetic abundance estimation in brown and black bears.</p>
+      </div>
+      <div class="person">
+        <div class="img">QJ</div>
+        <h3>Quinby Janes</h3><div class="meta">Columbia SIPA</div>
+        <p>Sustainable Development.</p>
+      </div>
+      <div class="person">
+        <div class="img">KM</div>
+        <h3>Kaya Mims</h3><div class="meta">Barnard College</div>
+        <p>Undergraduate researcher.</p>
+      </div>
+    </div>
+
+    <details class="alumni">
+      <summary>Lab alumni (50+) and where they are now</summary>
+      <ul class="alum-list">
+        <li><h4>PhD</h4></li>
+        <li><b>Dr. Courtney Silver-Peavey</b> (2019–24, Ohio U.): neonic pesticide carryover effects in wood frogs</li>
+        <li><b>Dr. Matthew Kaunert</b> (2017–24): Eastern hellbender ecology. Now Director, Clean Water Institute, Lycoming College</li>
+        <li><b>Dr. Marissa Dyck</b> (2018–23): bobcat viability and carnivore guild interactions. Now Postdoc, U. Victoria</li>
+        <li><b>Dr. Cassandra Thompson</b> (2016–22): multiple stressors in amphibians. Now Asst. Prof., Lees-McRae College</li>
+        <li><b>Dr. Mihai Pop</b> (2015–19, U. Bucharest): brown bear ecology. Now Senior Scientist, ACDB Romania</li>
+        <li><h4>Masters</h4></li>
+        <li><b>Brigitte Harbers</b> (2024–26): ML elk detection from drone imagery</li>
+        <li><b>Soham Mehta</b> (2024–26): human–wildlife conflict, Peruvian Amazon</li>
+        <li><b>Hannah Hess</b> (2024–26): Carpathian mammal trophic interactions</li>
+        <li><b>Adrian Casanova</b> (2024–26): ecotourism in Madre de Dios, Peru</li>
+        <li><b>Arel Triyono</b> (2024–26): hellbender space use and infrastructure</li>
+        <li><b>Dani Pergola</b> (2023–25): hellbender density and behaviour</li>
+        <li><b>Henry Hardy</b> (2023–25): bobcat–coyote co-occupancy</li>
+        <li><b>Jared Kannel</b> (2023–25): bison rewilding effects on habitat</li>
+        <li><b>Lucy Holland</b> (2022–24): translocated European bison spatial ecology</li>
+        <li><b>Sam Mathes</b> (2022–24): water quality and hellbender larvae. Now PhD, Mississippi State</li>
+        <li><b>Ryan Brown</b> (2020–22): conductivity and hellbender eggs. Now Pheasants Forever / USDA-NRCS</li>
+        <li><b>Heidi Bencin</b> (2016–18): bobcat occupancy and road mortality</li>
+        <li><b>Marcel Weigand</b> (2016–18): highways and box turtles. Now The Nature Conservancy</li>
+        <li><h4>Postdocs</h4></li>
+        <li><b>Dr. Iulia Miu</b> (2023–24, Fulbright): conservation planning</li>
+        <li><b>Dr. Chris Baker</b> (2019–21): eDNA hierarchical modelling. Now Asst. Prof., UMass Boston</li>
+        <li><b>Dr. Florina Stanescu</b> (2018, Fulbright): amphibians and climate change</li>
+        <li><b>Dr. Ruben Iosif</b> (2015–17): hierarchical wildlife modelling. Now Conservation Carpathia</li>
+        <li><h4>Undergraduates</h4></li>
+        <li>Jillian Sullivan, Peyton Munroe (Barnard 2026) · Ashlynn Canode, Madeline Kenyon, Andrew Connolly, Paige Roswell, Era Bakia, Helena Littler (OHIO 2023) · Sarah Romer (2021) · Ryan Wagner, Megan Sweeney, Andrew Travers, Sanketh Menon (2020) · Christine Hanson, Julia Golias (2019) · Noah Skinner (2018) · Kyle Brooks, Mackenzie Rich (2017) · Eva Garcia (Montpellier intern, 2018)</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="wrap">
+    <div class="eyebrow">Publications</div>
+    <h2>Selected &amp; complete list</h2>
+    <p class="lede">Lab members are marked with <b>*</b>. Search by species, place, journal or co-author.</p>
+
+    <div class="pub-tools">
+      <input id="q" type="search" placeholder="Search e.g. hellbender, Romania, occupancy…">
+      <button class="chip on" data-t="all">All</button>
+      <button class="chip" data-t="carn">Carnivores &amp; mammals</button>
+      <button class="chip" data-t="herp">Amphibians &amp; reptiles</button>
+      <button class="chip" data-t="mon">Monitoring &amp; methods</button>
+      <button class="chip" data-t="plan">Planning &amp; policy</button>
+    </div>
+    <div class="count" id="count"></div>
+    <div id="pubs"></div>
+    <button class="chip showall" id="more">Show all years</button>
+
+    <div class="grid books">
+      <div class="img"><img src="assets/img/textbook.jpg" alt="Fundamentals of Conservation Biology cover" onerror="this.remove()"></div>
+      <div>
+        <h3>Fundamentals of Conservation Biology, 4th edition (2021)</h3>
+        <p style="margin:0 0 .5em">Hunter, M.L., J.P. Gibbs &amp; V.D. Popescu · Wiley</p>
+        <a href="https://www.wiley.com/en-ai/Fundamentals+of+Conservation+Biology,+4th+Edition-p-9781119144168">Publisher page</a> ·
+        <a href="assets/docs/cb4_references.zip">Download all references (.RIS)</a>
+        <p class="note" style="margin-top:.8em">Book chapters in <i>Reptile Ecology and Conservation</i> (OUP 2016), <i>Amphibian Ecology and Conservation</i> (OUP 2009), <i>Conserving Wildlife Populations in a Changing Climate</i> (Chicago 2012) and <i>Problem-Solving in Conservation Biology</i> (Blackwell 2007).</p>
+      </div>
+    </div>
+    <p class="note" style="margin-top:20px">Editorial roles: Associate Editor, <i>Conservation Science and Practice</i> · Senior Editor, <i>Scientific Reports</i> · Editor, <i>Integrative Conservation</i></p>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section id="news">
+  <div class="wrap">
+    <div class="eyebrow">News</div>
+    <h2>Lab updates</h2>
+    <div class="news-grid" style="margin-top:32px">
+      <ul class="timeline">
+        <li><div class="when">2026</div><p>New papers on translocated European bison in <a href="https://esajournals.onlinelibrary.wiley.com/doi/10.1002/ecs2.70574"><i>Ecosphere</i></a> (Lucy Holland), hellbender nest boxes as a density tool in <i>Aquatic Conservation</i> (Dani Pergola), and a dispatch in <a href="https://doi.org/10.1016/j.cub.2025.12.062"><i>Current Biology</i></a>.</p></li>
+        <li><div class="when">Fall 2025</div><p>Welcome to new E3B MA students Matt Huang and Luveen Wadhwani!</p></li>
+        <li><div class="when">Spring 2025</div><p>A new <a href="https://www.science.org/stoken/author-tokens/ST-2525/full">Letter in <i>Science</i></a> on lethal brown bear management in Romania, continuing 10+ years of pushing for evidence-based carnivore policy (see also <a href="assets/docs/science-2019.pdf">2019</a> and <a href="assets/docs/science-2021.pdf">2021</a>).</p></li>
+        <li><div class="when">Winter 2024–25</div><p>Fieldwork in Madre de Dios, Peruvian Amazon: ecotourism sustainability in Tambopata and camera-trap biodiversity surveys near Iñapari.</p></li>
+        <li><div class="when">Fall 2024</div><p>Three new MA students (Arel Triyono, Adrian Casanova, Hannah Hess). Dani, Henry and Jared present at TWS 2024 in Baltimore and the AMNH Student Conference on Conservation Science.</p></li>
+        <li><div class="when">Summer 2024</div><p>Lucy Holland becomes our first Columbia graduate, after bison fieldwork in Romania and a poster at ECCB 2024 in Bologna.</p></li>
+        <li><div class="when">Summer 2023</div><p>The lab moves from Ohio University to <a href="https://e3b.columbia.edu/">Columbia E3B</a> in New York City.</p></li>
+      </ul>
+      <div>
+        <h3>In the media</h3>
+        <ul class="media">
+          <li><span class="src">Inside Climate News · 2026</span><a href="https://insideclimatenews.org/news/13012026/todays-climate-natural-capital-accounting-economy/">Natural capital accounting and the value of nature</a></li>
+          <li><span class="src">The Wildlife Professional · 2024</span><a href="assets/docs/wildlife-professional-2024.pdf">Scientist profile: Viorel Popescu</a></li>
+          <li><span class="src">Phys.org · 2023</span><a href="https://phys.org/news/2023-02-livestock-predation-brown-romania.html">Livestock predation by brown bears in Romania</a></li>
+          <li><span class="src">Ohio Forum · 2022</span><a href="https://www.ohio-forum.com/2022/08/cassandra-thompson-shows-danger-to-frogs-from-pesticide-but-points-out-a-solution/">Pesticide danger to frogs, and a solution</a></li>
+          <li><span class="src">The Wildlife Society · 2020</span><a href="https://wildlife.org/coyotes-and-bobcats-coexist/">Coyotes and bobcats coexist</a></li>
+          <li><span class="src">Phys.org / Yahoo News · 2019</span><a href="https://phys.org/news/2019-11-country-romania-cohabitation-strenuous.html">In bear country Romania, cohabitation grows strenuous</a></li>
+          <li><span class="src">ScienceDaily · 2019</span><a href="https://www.sciencedaily.com/releases/2019/11/191106114200.htm">Turtles near highways weren't impacted as expected</a></li>
+          <li><span class="src">Gizmodo Earther · 2018</span><a href="https://earther.gizmodo.com/a-fight-over-killing-bobcats-is-raging-across-the-midwe-1828682544">The fight over killing bobcats in the Midwest</a></li>
+          <li><span class="src">Film</span><a href="https://vimeo.com/743479212/3e0154b274"><i>Hellbent</i>, featuring Dr. Matt Kaunert</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOIN -->
+<section class="join" id="join">
+  <div class="wrap cols">
+    <div>
+      <div class="eyebrow" style="color:#e8c48f">Prospective students</div>
+      <h2>Join the lab</h2>
+      <p>I am recruiting Master's students through the <a href="https://e3b.columbia.edu/e3b-ma-program/">Columbia E3B MA in Ecology, Evolution and Conservation Biology</a>. Core directions are amphibian ecology, carnivore ecology and spatial conservation planning, and students are welcome to develop their own conservation projects.</p>
+      <p>PhD applicants: I am happy to serve on committees; admission to the <a href="https://e3b.columbia.edu/students/prospective/phd/">E3B PhD program</a> goes through an E3B core faculty member.</p>
+    </div>
+    <div class="box">
+      <h3 style="color:#fff">How to reach out</h3>
+      <ol>
+        <li>Email <a href="mailto:v.popescu@columbia.edu">v.popescu@columbia.edu</a></li>
+        <li>Attach your CV</li>
+        <li>Include a short cover letter on your interests and background in ecology &amp; conservation</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap about">
+    <div>
+      <div class="eyebrow">Contact</div>
+      <h2>Get in touch</h2>
+      <p class="lede">We collaborate with agencies, NGOs, industry and researchers on applied conservation problems. Get in touch if you'd like to work together.</p>
+    </div>
+    <dl class="facts">
+      <dt>Email</dt><dd><a href="mailto:v.popescu@columbia.edu">v.popescu@columbia.edu</a></dd>
+      <dt>Address</dt><dd>Dept. of Ecology, Evolution &amp; Environmental Biology<br>Columbia University, New York, NY 10027</dd>
+      <dt>Elsewhere</dt><dd><a href="https://www.linkedin.com/in/viorel-popescu-9a72b379/">LinkedIn</a> · <a href="https://x.com/vioreldpopescu">X / Twitter</a></dd>
+    </dl>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 The BEAST Lab · Biodiversity, Ecosystems and Animal Studies Team</span>
+    <span><a href="https://e3b.columbia.edu/">Columbia E3B</a></span>
+  </div>
+</footer>
+
+<script>
+// [year, authors, title, venue, link]
+const P=[
+["In press","Kopsco, H., B. Cary, W. Fu, … V.D. Popescu, … M. Diuk-Wasser","Perceptions of tick encounter and tickborne disease risk across urban gradients","BMC Public Health",""],
+["In press","Fu, W., M.V. Lilly, S-J. Lee, … V.D. Popescu, … M. Diuk-Wasser","Mapping tick-borne hazard across gradients of urban intensity in metropolitan regions","Parasites and Vectors",""],
+["In press","Iannarilli, F., … V.D. Popescu, … F. Cagnacci","Snapshot Europe 2021–2022: The first public dataset from a Europe-wide camera-trap survey of terrestrial vertebrates","Ecology",""],
+[2026,"Pergola, D.*, M.D.D. Kaunert, R.K. Brown & V.D. Popescu","Hidden giants: Nest boxes as a non-invasive method for estimating density of a declining giant salamander, the Eastern Hellbender","Aquatic Conservation: Marine and Freshwater Ecosystems 36: e70455",""],
+[2026,"Kissel, A.M., L.M. Lacey, V.D. Popescu, M. Dyck, L.L. Bailey & E. Muths","Disease, drought and warming, a triple threat to a declining high-elevation amphibian","Ecology and Evolution 16: e73767","https://doi.org/10.1002/ece3.73767"],
+[2026,"Mirea, M.D., I.V. Miu, V.D. Popescu, L.C. Pandaru, S. Manolache, S. Chiriac & L. Rozylowicz","Hermit beetle (Osmoderma barnabita) habitat selection and movement are shaped by tree microhabitat availability in Eastern Romanian Carpathians","Insect Conservation and Diversity 19: 1015–1030","https://resjournals.onlinelibrary.wiley.com/doi/10.1111/icad.70078"],
+[2026,"Holland, L.*, R. Iosif, A. Aldea, C. Serban & V.D. Popescu","Spatial ecology and habitat selection of translocated European bison in the Romanian Carpathians","Ecosphere 17: e70574","https://esajournals.onlinelibrary.wiley.com/doi/10.1002/ecs2.70574"],
+[2026,"Popescu, V.D.","Island biogeography revisited: Invasive predators rewire island food webs","Current Biology 36: R145–R147","https://doi.org/10.1016/j.cub.2025.12.062"],
+[2026,"Kaunert, M.D.D.*, S.F. Spear, R. Brown & V.D. Popescu","Water quality influences paternal care behaviors and nest fate in Eastern Hellbender salamanders","Journal of Zoology 329: 130–144","https://zslpublications.onlinelibrary.wiley.com/doi/10.1111/jzo.70115"],
+[2026,"Mathes, S.*, N. Cunningham*, K. Johnson, S. Kuchta, R. Brown*, M.D. Kaunert & V.D. Popescu","Developmental, physiological and fitness consequences of chronic exposure to high conductivity in larval Eastern Hellbenders","Journal of Zoology 328: 303–315","https://doi.org/10.1111/jzo.70097"],
+[2026,"Wu, C., V.D. Popescu & Y. Ji","Hierarchical occupancy model–based solutions to biodiversity assessment challenges","Biodiversity Science 34: 25386","https://www.biodiversity-science.net/EN/10.17520/biods.2025386"],
+[2025,"Cai, W., Y. Li, C. Yang, Z. Ding, W. Zhang, V.D. Popescu & J. Yang","Airborne eDNA reveals resource-based assembly of frugivorous vertebrates in the tropical rainforest","Molecular Ecology Resources 25: e70056","http://dx.doi.org/10.1111/1755-0998.70056"],
+[2025,"Ji, Y., A. Diana, X. Li, E. Matechou, J.E. Griffin, … V.D. Popescu","High quality, granular, timely, trustworthy and efficient vertebrate species distributions data across a 30,000 sqkm protected area complex","Ecology Letters 28: e70302","https://doi.org/10.1111/ele.70302"],
+[2025,"Wang, Y., Z. Liu, V.D. Popescu, Z. Ding, X. Luo, C. Yang, G. Wang & C. Yang","Comparative efficiency of multiple eDNA sampling methods for monitoring vertebrate diversity in mountainous regions","Environmental DNA 7: e70168","https://onlinelibrary.wiley.com/doi/10.1002/edn3.70168"],
+[2025,"Dyck, M., R. Iosif, B. Promberger-Furpass & V.D. Popescu","Dracula's Menagerie Reloaded: Assessing the relative roles of habitat and interspecific interactions in an intact mammalian assemblage using Structural Equation Modeling","Ecology and Evolution 15: e71381","https://doi.org/10.1002/ece3.71381"],
+[2025,"Pop, M.I., R. Iosif, B. Promberger-Furpass, S. Chiriac, A.-Z. Keresztesi, L. Rozylowicz & V.D. Popescu","Romanian brown bear management regresses","Science 387: 1361","https://www.science.org/stoken/author-tokens/ST-2525/full"],
+[2025,"Brown, R.*, M.D.D. Kaunert*, K. Johnson, W. Roosenburg & V.D. Popescu","Assessing the effects of conductivity on egg development and survival of Eastern Hellbenders","Scientific Reports 15: 6821","https://www.nature.com/articles/s41598-024-82969-5"],
+[2024,"Kenyon, M.*, C. Dennison & V.D. Popescu","Improving the efficiency of aerial surveys for monitoring North American beaver population dynamics","Wildlife Research 51(10)","https://www.publish.csiro.au/WR/WR23105"],
+[2024,"Mirea, M.D.*, I.V. Miu, V.D. Popescu, B.S. Brodie, S. Chiriac & L. Rozylowicz","Priority conservation areas for protected saproxylic beetles in Romania under current and future climate scenarios","Biodiversity and Conservation 33: 2949–2973","https://link.springer.com/article/10.1007/s10531-024-02898-7"],
+[2024,"Connolly, A.* & V.D. Popescu","Trends in anuran occupancy dynamics in a forested landscape in southeastern Ohio","Herpetological Conservation and Biology 19: 48–62","https://www.herpconbio.org/Volume_19/Issue_1/Connolly_Popescu_2024.pdf"],
+[2024,"Brehme, C.S., S.O. Petrovan, V.D. Popescu, T.E.S. Langton, K.M. Andrews & R.N. Fisher","Editorial on the Research Topic: Amphibian and reptile road ecology","Frontiers in Ecology and Evolution","https://www.frontiersin.org/articles/10.3389/fevo.2024.1415003/full"],
+[2024,"Dyck, M.*, G. Uhrig, S. Spear, R. Iosif & V.D. Popescu","First density estimates for a recovering bobcat population in southeast Ohio using DNA from scat","Population Ecology 66: 294–307","https://doi.org/10.1002/1438-390X.12184"],
+[2024,"Rozylowicz, L., V.D. Popescu, S. Manolache, A. Nita, S.R. Gradinaru, M.D. Mirea & R.I. Bancila","Occupancy and N-mixture modeling applications in ecology: a bibliometric analysis","Global Ecology and Conservation 50: e02838","https://doi.org/10.1016/j.gecco.2024.e02838"],
+[2023,"Kaunert, M.D.D.*, R.K. Brown*, S.F. Spear, P.B. Johantgen & V.D. Popescu","Restoring eastern hellbender populations through translocation of headstarted individuals","Population Ecology 66: 93–107","https://esj-journals.onlinelibrary.wiley.com/doi/full/10.1002/1438-390X.12171"],
+[2023,"Edwards, W.I., V.D. Popescu, N. Guma, H. Agaba, G. Balyesiima, L. Nakami & N.J. Stevens","Living at the edge: Home range patterns of the Buraiga Chimpanzee Community, Kibale National Park, Uganda","Frontiers in Ecology and Evolution 11: 1267688","https://www.frontiersin.org/articles/10.3389/fevo.2023.1267688/full"],
+[2023,"Blakeman, E.*, V.D. Popescu, E. Olin*, C. Scott & B.S. Brodie","Harnessing social media to evaluate flies (Diptera) flower foraging and pollen load","Journal of Pollination Ecology 33: 180–193","https://pollinationecology.org/index.php/jpe/article/view/724"],
+[2023,"Dyck, M.*, K.T. Shoemaker, C.A. Dennison & V.D. Popescu","Simulated effects of roadkill and harvest on the viability of a recovering bobcat population","Journal of Wildlife Management e22460","http://doi.org/10.1002/jwmg.22460"],
+[2023,"Sperry, B.R., V.D. Popescu, E. Wyza*, S. Porter, R. Wiley, D. Cottrill* & D. McAvoy","Assessment of deer-vehicle crash mitigation structures on the U.S. 33 Nelsonville Bypass","Journal of Transportation Engineering, Part A 149: 05023004","https://ascelibrary.org/doi/full/10.1061/JTEPBS.TEENG-7156"],
+[2023,"Harman, K.*, K. Omlor* & V.D. Popescu","Evaluating fence-end treatments to mitigate for the fence-end effect using behavioral analysis","Frontiers in Ecology and Evolution 11: 1008462","https://www.frontiersin.org/articles/10.3389/fevo.2023.1008462/full"],
+[2023,"Pop, M.I., S.R. Gradinaru, V.D. Popescu, D. Haase & C.I. Iojă","Emergency-line calls as an indicator to assess human-wildlife interaction in urban areas","Ecosphere 14: e4418","https://esajournals.onlinelibrary.wiley.com/doi/10.1002/ecs2.4418"],
+[2023,"Pop, M.I., M. Dyck*, S. Chiriac, L. Berde, S. Szabo, C. Ioja & V.D. Popescu","Predictors of brown bear predation events in the Romanian Carpathians","Conservation Science and Practice","https://conbio.onlinelibrary.wiley.com/doi/full/10.1111/csp2.12884"],
+[2022,"Dyck, M.*, R. Iosif, B. Promberger, C. Promberger & V.D. Popescu","Dracula's menagerie: A multispecies occupancy analysis of lynx, wildcat, and wolf in the Romanian Carpathians","Ecology and Evolution 12: e8921","https://onlinelibrary.wiley.com/doi/10.1002/ece3.8921"],
+[2022,"Thompson, C.*, M.R. Sweeney* & V.D. Popescu","Carryover effects of sublethal exposure to pesticide Imidacloprid and shortened hydroperiod on juvenile wood frog fitness and behavior","Journal of Zoology 317: 229–240","https://zslpublications.onlinelibrary.wiley.com/doi/10.1111/jzo.12975"],
+[2022,"Iosif, R., V.D. Popescu, M. Dyck* & B. Promberger","Estimating Eurasian lynx density using camera traps in the Romanian Carpathians","Journal of Mammalogy 103: 415–424","https://doi.org/10.1093/jmammal/gyab157"],
+[2022,"Ji, Y., C.C.M. Baker, V.D. Popescu, … N.E. Pierce & D.W. Yu","Measuring protected-area effectiveness using vertebrate distributions from leech iDNA","Nature Communications 13: 1555","https://www.nature.com/articles/s41467-022-28778-8"],
+[2022,"Geue, J., P.J. Rotter*, C. Gross, Z. Benko, I. Kovacs, C. Fantana, V.D. Popescu & H.A. Thomassen","Bird species and habitat types have limited use as reciprocal surrogates and are inconsistently represented in the current Natura 2000 network in Romania","PLOS ONE 17(2): e0251950","https://doi.org/10.1371/journal.pone.0251950"],
+[2022,"Earl, J.E., S.M. Blomquist, E.B. Harper, … V.D. Popescu, T.A.G. Rittenhouse & B. Rothermel","Amphibian biomass export from geographically isolated wetlands","Diversity 14(3): 163","http://mdpi.com/1424-2818/14/3/163"],
+[2022,"Dyck, M.*, E. Wyza* & V.D. Popescu","When carnivores collide: a review of competitive interactions between bobcats and coyotes","Mammal Review 52: 52–66","https://onlinelibrary.wiley.com/doi/full/10.1111/mam.12260"],
+[2021,"Popescu, V.D., M. Kenyon*, R. Brown*, M. Dyck*, S. Prange, W. Peterman & C. Dennison","Habitat connectivity and resource selection in an expanding US Midwest bobcat population","PeerJ 9: e12460","https://peerj.com/articles/12460/"],
+[2021,"Popescu, V.D., M.I. Pop & L. Rozylowicz","Trophy hunting undermines public trust","Science 372: 1049","assets/docs/science-2021.pdf"],
+[2021,"Sweeney, M.R.*, C. Thompson* & V.D. Popescu","Sub-lethal exposure to neonicotinoid pesticide Imidacloprid induces behavioral changes in larval wood frogs","Environmental Toxicology and Chemistry 40: 1840–1849","https://setac.onlinelibrary.wiley.com/doi/10.1002/etc.5047"],
+[2021,"Wagner, R.B.*, C. Brune & V.D. Popescu","Snakes on a lane: Snake road mortality is influenced by land cover and traffic intensity in a road-dense area of US Midwest","Journal for Nature Conservation 61: 125978","https://www.sciencedirect.com/science/article/abs/pii/S161713812100025X"],
+[2021,"Thompson, C.M.* & V.D. Popescu","Hydro-period induced carryover responses for survival, growth, and endurance of a pond-breeding amphibian","Oecologia 195: 1071–1081","https://link.springer.com/article/10.1007/s00442-021-04881-3"],
+[2020,"Miu, I.*, L. Rozylowicz, V.D. Popescu & P. Anastasiu","Identification of areas of very high biodiversity value to achieve the EU Biodiversity Strategy for 2030 key commitments","PeerJ 8: e10067","https://peerj.com/articles/10067/"],
+[2020,"Popescu, V.D., R. Munshaw*, N. Shackelford, F. Montesino-Pouzols, W.J. Palen, E. Dubman*, P. Gibeau*, M. Horne & A. Moilanen","Quantifying biodiversity trade-offs in the face of widespread renewable and unconventional energy development","Scientific Reports 10: 7603","https://www.nature.com/articles/s41598-020-64501-7"],
+[2020,"Iosif, R., M.I. Pop*, L. Rozylowicz, S. Chiriac, R.M. Sandu, L. Berde, S. Szabó & V.D. Popescu","Den structure and selection of denning habitat by brown bears in the Romanian Carpathians","Ursus 31e5: 1–13","https://bioone.org/journals/Ursus/volume-2020/issue-31e5/URSUS-D-18-00010.1/Den-structure-and-selection-of-denning-habitat-by-brown-bears/10.2192/URSUS-D-18-00010.1.short"],
+[2020,"Wyza, E.*, L. Dollar, L.P. Rahajanirina, V.D. Popescu & N. Stevens","Spatial dynamics and activity patterns of the fosa Cryptoprocta ferox in Ankarafantsika National Park, Madagascar","Oryx","https://doi.org/10.1017/S0030605319000498"],
+[2019,"Treves, A., F.J. Santiago-Ávila*, V.D. Popescu, P.C. Paquet, W.S. Lynn, C.T. Darimont & K.A. Artelle","Trophy hunting: Insufficient evidence","Science 366: 435","https://science.sciencemag.org/content/366/6464/435.1.full"],
+[2019,"Bencin, H.*, C. Rose, S. Prange & V.D. Popescu","Roadkill and space use data predict vehicle-strike hotspots and mortality rates in a recovering bobcat population","Scientific Reports 9: 15391","https://www.nature.com/articles/s41598-019-50931-5"],
+[2019,"D'Amore, D.*, M. Morris & V.D. Popescu","Invasive process does not produce 'invasive syndrome' in Xiphophorus helleri-maculatus hybrids","Animal Behaviour 156: 79–85","https://www.sciencedirect.com/science/article/pii/S0003347219302544"],
+[2019,"Weigand, N.*, R. Wagner*, C. Tonra & V.D. Popescu","Proximity to highways has limited influence on space use and physiology of terrestrial testudines","European Journal of Wildlife Research 65: 80","https://rdcu.be/bP9KQ"],
+[2019,"Popescu, V.D., M.I. Pop*, S. Chiriac & L. Rozylowicz","Romanian large carnivores at a crossroads","Science 364: 1041","https://science.sciencemag.org/content/364/6445/1041"],
+[2019,"Brodie, B.S., V.D. Popescu, R. Iosif, … & L. Rozylowicz","Non-lethal monitoring of longicorn beetle communities using generic pheromone lures and occupancy models","Ecological Indicators 101: 330–340","https://www.sciencedirect.com/science/article/pii/S1470160X19300548"],
+[2019,"Rozylowicz, L., F.P. Bodescu, … & V.D. Popescu","Empirical analysis and modelling of Argos Doppler location errors in Romania","PeerJ 7: e6362","https://peerj.com/articles/6362/"],
+[2019,"Wood, C., V.D. Popescu, H. Klinck, J. Keane, R.J. Gutierrez, S. Sawyer, F. Atuo & M.Z. Peery","Detecting small population changes at landscape scales: A bioacoustic-site occupancy framework","Ecological Indicators 98: 492–507","https://www.sciencedirect.com/science/article/pii/S1470160X18308793"],
+[2019,"Rozylowicz, L., A. Nita, S. Manolache*, V.D. Popescu & T. Hartel","Navigating protected areas networks for improving diffusion of conservation practices","Journal of Environmental Management 230: 413–421","https://www.sciencedirect.com/science/article/pii/S0301479718310983"],
+[2018,"Miu, I.*, G. Chisamera, V.D. Popescu, … & L. Rozylowicz","Conservation priorities for terrestrial mammals in Dobrogea Region, Romania","ZooKeys 792: 133–158","https://zookeys.pensoft.net/article/25314/"],
+[2018,"Rich, M.*, C. Thompson*, S. Prange & V.D. Popescu","Relative importance of habitat characteristics and interspecific interactions in determining terrestrial carnivore occurrence","Frontiers in Ecology and Evolution 6: 78","https://www.frontiersin.org/articles/10.3389/fevo.2018.00078/full"],
+[2018,"Pop, M.I.*, R. Iosif, I.V. Miu*, S. Chiriac, L. Rozylowicz & V.D. Popescu","Combining resource selection functions and home range to identify conservation priority habitats for brown bears","Animal Conservation 21: 352–362",""],
+[2018,"Pop, M.I.*, L. Bereczky, S. Chiriac, R. Iosif, A. Nita, V.D. Popescu & L. Rozylowicz","Movement ecology of brown bears (Ursus arctos) in the Romanian Eastern Carpathians","Nature Conservation 26: 15–31","https://natureconservation.pensoft.net/article/22955/"],
+[2018,"Nita, A., S. Manolache*, C.M. Ciocanea, V.D. Popescu & L. Rozylowicz","Power, influence and structure in Natura 2000 governance networks","Journal of Environmental Management 212: 54–64",""],
+[2017,"Popescu, V.D., R. Iosif, M. Pop*, S. Chiriac, G. Bouros & B.J. Furnas","Integrating sign surveys and home range data for estimating brown bear density in the Romanian Carpathians","Ecology and Evolution 7: 7134–7144","http://onlinelibrary.wiley.com/doi/10.1002/ece3.3177/abstract"],
+[2017,"Rozylowicz, L., A. Nita, S. Manolache*, C.M. Ciocanea & V.D. Popescu","Recipe for success: A network perspective of partnership in nature conservation","Journal for Nature Conservation 38: 21–29",""],
+[2016,"Nita, A., L. Rozylowicz, S. Manolache*, C.M. Ciocănea, I.V. Miu* & V.D. Popescu","Collaboration networks in LIFE Nature projects across Europe","PLoS ONE 11(10): e0164503","http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0164503"],
+[2016,"Yang, C., D.A. Schaefer, W. Liu, V.D. Popescu, C. Yang, X. Wang, C. Wu & D.W. Yu","Higher fungal diversity reduces CO₂ emissions from dead wood in a natural forest","Scientific Reports 6: 31066","http://www.nature.com/articles/srep31066"],
+[2016,"Popescu, V.D., K. Artelle*, M. Pop*, S. Manolache & L. Rozylowicz","Assessing biological realism of wildlife population estimates in data-poor systems","Journal of Applied Ecology 53(4): 1248–1259","http://onlinelibrary.wiley.com/doi/10.1111/1365-2664.12660/abstract"],
+[2016,"Sweitzer, R.A., V.D. Popescu, R.H. Barrett, … & L.W. Woods","Mortality risks and limits to population growth of fishers in California","Journal of Wildlife Management 80: 438–451",""],
+[2015,"Murray, R.*, V.D. Popescu, W. Palen & P. Govindarajulu","Relative performance of ecological niche and occupancy models for predicting invasions by patchily-distributed species","Biological Invasions 17(9): 2691–2706",""],
+[2015,"Sweitzer, R., V.D. Popescu, K.L. Purcell, C.M. Thompson & R.H. Barrett","Population size, density, and demography of fishers in the Sierra National Forest, California","Journal of Mammalogy 96(4): 772–790",""],
+[2014,"Popescu, V.D., L. Rozylowicz, I. Niculae, A. Cucu & T. Hartel","Species, habitats, society: An evaluation of research supporting EU's Natura 2000 network","PLoS ONE 9(11): e113648","http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0113648"],
+[2014,"Souther, S., M. Tingley, V.D. Popescu, … & K. Terrell","Biotic impacts of energy development from shale: Research priorities and knowledge gaps","Frontiers in Ecology and the Environment 12(6): 330–338",""],
+[2014,"Popescu, V.D., P. de Valpine & R. Sweitzer","Testing the consistency of wildlife data types before combining them: the case of camera traps and telemetry","Ecology and Evolution 4(7): 933–943","http://onlinelibrary.wiley.com/doi/10.1002/ece3.997/full"],
+[2014,"Mikoláš, M., M. Svoboda, … V.D. Popescu, … & D. Kraus","Comment on the 'Opinion paper: Forest management and biodiversity': The role of protected areas is greater than the sum of its number of species","Web Ecology 14: 61–64","http://www.web-ecol.net/14/61/2014/we-14-61-2014.html"],
+[2014,"Hartel, T., T. Sos, V.D. Popescu, R.I. Băncilă, D. Cogalniceanu & L. Rozylowicz","Amphibian conservation in traditional cultural landscapes: the case of Central Romania","North-Western Journal of Zoology 10(S1): S51–S61","http://biozoojournals.ro/nwjz/content/v10s1/nwjz_140503_Hartel.pdf"],
+[2014,"Eck, B.*, A. Byrne*, D.A. Patrick, V.D. Popescu & E.B. Harper","Effects of water temperature on larval amphibian predator-prey dynamics","Herpetological Conservation and Biology 9(2): 302–308","http://www.herpconbio.org/Volume_9/Issue_2/Eck_etal_2014.pdf"],
+[2013,"Popescu, V.D., A.M. Kissel*, M.M. Pearson, W.J. Palen, P. Govindarajulu & C.A. Bishop","Defining conservation-relevant habitat selection by the highly imperiled Oregon Spotted Frog","Herpetological Conservation and Biology 8(3): 688–706","http://www.herpconbio.org/Volume_8/Issue_3/Popescue_etal_2013.pdf"],
+[2013,"Popescu, V.D., L. Rozylowicz, D. Cogalniceanu, I. Niculae & A. Cucu","Moving into protected areas? Setting priorities for conservation for Romanian reptiles and amphibians at risk from climate change","PLoS ONE 8: e79330","http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0079330"],
+[2013,"Rozylowicz, L. & V.D. Popescu","Habitat selection and movement ecology of Eastern Hermann's tortoises in a rural Romanian landscape","European Journal of Wildlife Research 59: 47–55",""],
+[2013,"Iosif, R.*, L. Rozylowicz & V.D. Popescu","Modeling road mortality hotspots for Eastern Hermann's tortoise in Romania","Amphibia-Reptilia 34: 163–172",""],
+[2012,"Popescu, V.D., P. de Valpine, D. Tempel* & M.Z. Peery","Estimating population impacts via dynamic occupancy analysis of Before-After Control-Impact studies","Ecological Applications 22: 1389–1404",""],
+[2012,"Popescu, V.D., D.A. Patrick, M.L. Hunter & A.J.K. Calhoun","The role of forest harvesting and subsequent vegetative regrowth in determining patterns of amphibian habitat use","Forest Ecology and Management 270: 163–174",""],
+[2012,"Patrick, D.A., J.P. Gibbs, V.D. Popescu & D.A. Nelson","Multi-scale habitat-resistance models for predicting road mortality hotspots for reptiles and amphibians","Herpetological Conservation and Biology 7: 406–427","http://herpconbio.org/Volume_7/Issue_3/Patrick_etal_2012.pdf"],
+[2012,"Patrick, D.A., E.B. Harper, V.D. Popescu, … & J. Pierce*","The ecology of the Mink Frog in the Adirondack Park, NY, with notes on conducting experimental research","Herpetological Review 43: 396–397",""],
+[2012,"Popescu, V.D., B.S. Brodie, M.L. Hunter & J.D. Zydlewski","Use of olfactory cues by newly metamorphosed wood frogs during emigration","Copeia 3: 424–431",""],
+[2011,"Popescu, V.D. & M.L. Hunter","Clearcutting affects habitat connectivity for a forest amphibian by decreasing permeability to juvenile movements","Ecological Applications 21: 1283–1295",""],
+[2011,"Rozylowicz, L., V.D. Popescu, M. Patroescu & G. Chisamera","The potential of large carnivores as conservation surrogates in the Romanian Carpathians","Biodiversity and Conservation 20: 561–579",""],
+[2010,"Ioja, C.I., M. Patroescu, L. Rozylowicz, V.D. Popescu, M. Verghelet, M.I. Zotta & M. Felciuc","The efficacy of Romania's protected areas network for conserving biodiversity","Biological Conservation 143: 2468–2476",""],
+[2009,"Popescu, V.D. & J.P. Gibbs","Interactions between climate, beaver activity, and pond occupancy of the cold-adapted mink frog in New York State, USA","Biological Conservation 142: 2059–2068",""]
+];
+const T={
+ carn:/bear|bobcat|lynx|carnivor|wolf|wildcat|coyote|fisher|fosa|mammal|bison|chimpanzee|deer|beaver|predator|hunting/i,
+ herp:/hellbender|frog|amphibian|anuran|turtle|tortoise|testudines|snake|reptile|salamander/i,
+ mon:/dna|occupancy|camera|monitor|survey|density|estimat|bioacoustic|dataset|data types|model|location errors/i,
+ plan:/priorit|protected|natura|energy|policy|governance|network|trade-off|management|trust|hunting|strategy|partnership|LIFE/i
+};
+let topic="all",showAll=false;
+const box=document.getElementById("pubs"),q=document.getElementById("q"),more=document.getElementById("more");
+function esc(s){return s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]))}
+function render(){
+  const s=q.value.trim().toLowerCase();
+  const filtering = s||topic!=="all";
+  let list=P.filter(p=>{
+    const hay=(p[1]+" "+p[2]+" "+p[3]+" "+p[0]).toLowerCase();
+    if(s && !hay.includes(s)) return false;
+    if(topic!=="all" && !T[topic].test(p[2]+" "+p[3])) return false;
+    return true;
+  });
+  const total=list.length;
+  if(!filtering && !showAll) list=list.filter(p=>p[0]==="In press"||p[0]>=2024);
+  more.style.display=(filtering||showAll)?"none":"inline-block";
+  document.getElementById("count").textContent = filtering
+    ? total+" matching publication"+(total===1?"":"s")
+    : (showAll? P.length+" peer-reviewed publications" : "Showing 2024 – present · "+P.length+" total");
+  let html="",yr=null;
+  list.forEach(p=>{
+    if(p[0]!==yr){yr=p[0];html+='<div class="year">'+yr+'</div>';}
+    const a=esc(p[1]).replace(/(Popescu, V\.D\.|V\.D\. Popescu)/g,"<b>$1</b>");
+    html+='<div class="pub"><span class="a">'+a+'.</span> <span class="t">'+esc(p[2])+'.</span> <span class="v">'+esc(p[3])+'</span>'+(p[4]?'<a class="l" href="'+p[4]+'" target="_blank" rel="noopener">Link ↗</a>':'')+'</div>';
+  });
+  box.innerHTML=html||'<p class="note">No matches.</p>';
+}
+q.addEventListener("input",render);
+document.querySelectorAll(".chip[data-t]").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll(".chip[data-t]").forEach(x=>x.classList.remove("on"));
+  b.classList.add("on");topic=b.dataset.t;render();
+});
+more.onclick=()=>{showAll=true;render();};
+render();
+</script>
+</body>
+</html>
